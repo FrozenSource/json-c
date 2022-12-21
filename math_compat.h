@@ -11,7 +11,9 @@
 #ifndef HAVE_DECL_ISNAN
 #ifdef HAVE_DECL__ISNAN
 #include <float.h>
+#ifndef isnan
 #define isnan(x) _isnan(x)
+#endif
 #else
 /* On platforms like AIX and "IBM i" we need to provide our own isnan */
 #define isnan(x) ((x) != (x))
@@ -21,7 +23,9 @@
 #ifndef HAVE_DECL_ISINF
 #ifdef HAVE_DECL__FINITE
 #include <float.h>
+#ifndef isinf
 #define isinf(x) (!_finite(x))
+#endif
 #else
 #include <float.h>
 /* On platforms like AIX and "IBM i" we need to provide our own isinf */
@@ -31,12 +35,16 @@
 
 #ifndef HAVE_DECL_INFINITY
 #include <float.h>
+#ifndef INFINITY
 #define INFINITY (DBL_MAX + DBL_MAX)
+#endif
 #define HAVE_DECL_INFINITY
 #endif
 
 #ifndef HAVE_DECL_NAN
+#ifndef NAN
 #define NAN (INFINITY - INFINITY)
+#endif
 #define HAVE_DECL_NAN
 #endif
 
